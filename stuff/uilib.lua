@@ -509,10 +509,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			end
 		end)
 		local ContainerContent = {}
-		function ContainerContent:Button(text, desc, callback)
-			if desc == "" then
-				desc = "There is no description for this button."
-			end
+		function ContainerContent:Button(text, callback)
 			local BtnDescToggled = false
 			local Button = Instance.new("TextButton")
 			local ButtonCorner = Instance.new("UICorner")
@@ -521,9 +518,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			local CircleCorner = Instance.new("UICorner")
 			local CircleSmall = Instance.new("Frame")
 			local CircleSmallCorner = Instance.new("UICorner")
-			local Description = Instance.new("TextLabel")
-			local ArrowBtn = Instance.new("ImageButton")
-			local ArrowIco = Instance.new("ImageLabel")
 
 			Button.Name = "Button"
 			Button.Parent = Container
@@ -578,40 +572,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			CircleSmallCorner.CornerRadius = UDim.new(2, 6)
 			CircleSmallCorner.Name = "CircleSmallCorner"
 			CircleSmallCorner.Parent = CircleSmall
-
-			Description.Name = "Description"
-			Description.Parent = Title
-			Description.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Description.BackgroundTransparency = 1.000
-			Description.Position = UDim2.new(-0.200942323, 0, 0.785714269, 0)
-			Description.Size = UDim2.new(0, 432, 0, 31)
-			Description.Font = Enum.Font.Gotham
-			Description.Text = desc
-			Description.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Description.TextSize = 15.000
-			Description.TextTransparency = 1
-			Description.TextWrapped = true
-			Description.TextXAlignment = Enum.TextXAlignment.Left
-
-			ArrowBtn.Name = "ArrowBtn"
-			ArrowBtn.Parent = Button
-			ArrowBtn.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
-			ArrowBtn.BackgroundTransparency = 1.000
-			ArrowBtn.Position = UDim2.new(0.903719902, 0, 0, 0)
-			ArrowBtn.Size = UDim2.new(0, 33, 0, 37)
-			ArrowBtn.SliceCenter = Rect.new(30, 30, 30, 30)
-			ArrowBtn.SliceScale = 7.000
-
-			ArrowIco.Name = "ArrowIco"
-			ArrowIco.Parent = ArrowBtn
-			ArrowIco.AnchorPoint = Vector2.new(0.5, 0.5)
-			ArrowIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			ArrowIco.BackgroundTransparency = 1.000
-			ArrowIco.Position = UDim2.new(0.495753437, 0, 0.554054081, 0)
-			ArrowIco.Selectable = true
-			ArrowIco.Size = UDim2.new(0, 28, 0, 24)
-			ArrowIco.Image = "http://www.roblox.com/asset/?id=6034818372"
-			ArrowIco.ImageTransparency = .3
 			
 			Button.MouseEnter:Connect(function()
 				TweenService:Create(
@@ -633,98 +593,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				pcall(callback)
 			end)
 			
-			ArrowBtn.MouseButton1Click:Connect(function()
-				if BtnDescToggled == false then
-					Button:TweenSize(UDim2.new(0, 457, 0, 74), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-					TweenService:Create(
-						Title,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextColor3 = PresetColor}
-					):Play()
-					TweenService:Create(
-						ArrowIco,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{ImageColor3 = PresetColor}
-					):Play()
-					TweenService:Create(
-						ArrowIco,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{ImageTransparency = 0}
-					):Play()
-					TweenService:Create(
-						ArrowIco,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{Rotation = 180}
-					):Play()
-					TweenService:Create(
-						Circle,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundColor3 = PresetColor}
-					):Play()
-					TweenService:Create(
-						CircleSmall,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundTransparency = 0}
-					):Play()
-					TweenService:Create(
-						Title,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextTransparency = 0}
-					):Play()
-					TweenService:Create(
-						Description,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextTransparency = 0.3}
-					):Play()
-					wait(.4)
-					Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-				else
-					Button:TweenSize(UDim2.new(0, 457, 0, 43), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-					TweenService:Create(
-						Title,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextColor3 = Color3.fromRGB(255,255,255)}
-					):Play()
-					TweenService:Create(
-						ArrowIco,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{ImageColor3 = Color3.fromRGB(255,255,255)}
-					):Play()
-					TweenService:Create(
-						ArrowIco,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{ImageTransparency = .3}
-					):Play()
-					TweenService:Create(
-						ArrowIco,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{Rotation = 0}
-					):Play()
-					TweenService:Create(
-						Circle,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundColor3 = Color3.fromRGB(211, 211, 211)}
-					):Play()
-					TweenService:Create(
-						CircleSmall,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundTransparency = 1}
-					):Play()
-					TweenService:Create(
-						Title,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextTransparency = 0.3}
-					):Play()
-					TweenService:Create(
-						Description,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{TextTransparency = 1}
-					):Play()
-					wait(.4)
-					Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-				end
-				BtnDescToggled = not BtnDescToggled
-			end)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
 		function ContainerContent:Toggle(text, desc,default, callback)
