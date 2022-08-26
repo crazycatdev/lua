@@ -510,7 +510,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			end
 		end)
 		local ContainerContent = {}
-			local BtnDescToggled = false
 			local Button = Instance.new("TextButton")
 			local ButtonCorner = Instance.new("UICorner")
 			local Title = Instance.new("TextLabel")
